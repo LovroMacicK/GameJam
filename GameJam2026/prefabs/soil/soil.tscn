@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://4lqctl1uytmj"]
+
+[ext_resource type="Script" uid="uid://bxywfhhygfl1x" path="res://prefabs/soil/soil.gd" id="1_6nhhd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrjoq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nirye"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wrjoq"]
+
+[node name="Soil" type="StaticBody2D" unique_id=725218895]
+script = ExtResource("1_6nhhd")
+
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=1055993461]
+shape = SubResource("RectangleShape2D_wrjoq")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=28407035]
+sprite_frames = SubResource("SpriteFrames_nirye")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1542516072]
+
+[node name="Collider" type="CollisionShape2D" parent="InteractionArea" unique_id=1706999051]
+shape = SubResource("CircleShape2D_wrjoq")

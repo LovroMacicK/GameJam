@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://4tyi5jyb40sk"]
+
+[ext_resource type="Script" uid="uid://bxn570ey60yi2" path="res://prefabs/player/player.gd" id="1_sxsrd"]
+[ext_resource type="Texture2D" uid="uid://iud5lfp5pv3n" path="res://icon.svg" id="2_rdx4y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nirye"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wrjoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rdx4y")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_plg1o"]
+radius = 22.5
+height = 95.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1931862810]
+script = ExtResource("1_sxsrd")
+
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=691296988]
+shape = SubResource("RectangleShape2D_nirye")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=696891595]
+texture_filter = 1
+scale = Vector2(0.5, 0.494)
+sprite_frames = SubResource("SpriteFrames_wrjoq")
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1847709986]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1216360159]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=712556259]
+position = Vector2(0.5, 28.5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_plg1o")
