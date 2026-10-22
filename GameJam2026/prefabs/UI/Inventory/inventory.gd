@@ -1,28 +1,123 @@
-class_name Inventory extends Control
+class_name Inventory extends Node
 
-@export var inventory: Inventory
-@export var slot_scene: PackedScene
+signal inventory_changed
 
-@onready var grid: GridContainer = $PanelContainer/MarginContainer/VBoxContainer/GridContainer
+@export var inventory_size: int = 12
+
+var slots: Array[InventorySlot] = []
 
 
 func _ready() -> void:
-	if inventory == null || slot_scene == null:
-		push_error("InventoryUI: Inventory ali Slot Scene ni nastavljen!")
-
-	inventory.inventory_changed.connect(refresh_inventory)
-
-	create_slots()
-	refresh_inventory()
+	initialize_inventory()
 
 
-func create_slots() -> void:
-	for slot in inventory.slots:
-		var slot_ui: InventorySlotUI = slot_scene.instantiate()
-		grid.add_child(slot_ui)
+func initialize_inventory() -> void:
+	slots.clear()
+
+	for i in range(inventory_size):
+		var slot = InventorySlot.new()
+		slots.append(slot)
+
+	inventory_changed.emit()
 
 
-func refresh_inventory() -> void:
-	for i in range(inventory.slots.size()):
-		var slot_ui: InventorySlotUI = grid.get_child(i)
-		slot_ui.update_slot(inventory.slots[i])
+func add_item(item: ItemData, amount: int = 1) -> bool:
+	if item == null or amount <= 0:
+		return false
+
+	var available_space: int = 0
+
+	# Preverimo prostor v inventoryju
+	for slot in slots:
+		if slot.is_empty():
+			available_space += item.max_stack
+		elif slot.item == item:
+			available_space += maxi(
+				item.max_stack - slot.quantity, 0
+			)
+
+	if available_space < amount:
+		return false
+
+	var remaining: int = amount
+
+	# Najprej zapolnimo obstoječe stacke
+	for slot in slots:
+		if slot.item == item and slot.quantity < item.max_stack:
+			var space: int = item.max_stack - slot.quantity
+			var to_add: int = mini(space, remaining)
+
+			slot.quantity += to_add
+			remaining -= to_add
+
+			if remaining == 0:
+				inventory_changed.emit()
+				return true
+
+	# Nato zapolnimo prazne slote
+	for slot in slots:
+		if slot.is_empty():
+			var to_add: int = mini(item.max_stack, remaining)
+
+			slot.item = item
+			slot.quantity = to_add
+			remaining -= to_add
+
+			if remaining == 0:
+				inventory_changed.emit()
+				return true
+
+	return false
+
+
+func remove_item(item: ItemData, amount: int = 1) -> bool:
+	if item == null or amount <= 0:
+		return false
+
+	if not has_item(item, amount):
+		return false
+
+	var remaining: int = amount
+
+	for slot in slots:
+		if slot.item == item:
+			var to_remove: int = mini(slot.quantity, remaining)
+
+			slot.quantity -= to_remove
+			remaining -= to_remove
+
+			if slot.quantity <= 0:
+				slot.clear()
+
+			if remaining == 0:
+				inventory_changed.emit()
+				return true
+
+	return false
+
+
+func get_item_count(item: ItemData) -> int:
+	if item == null:
+		return 0
+
+	var total: int = 0
+
+	for slot in slots:
+		if slot.item == item:
+			total += slot.quantity
+
+	return total
+
+
+func has_item(item: ItemData, amount: int = 1) -> bool:
+	if item == null or amount <= 0:
+		return false
+
+	return get_item_count(item) >= amount
+
+
+func clear_inventory() -> void:
+	for slot in slots:
+		slot.clear()
+
+	inventory_changed.emit()

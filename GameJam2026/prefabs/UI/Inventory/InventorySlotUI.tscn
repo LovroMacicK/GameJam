@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cia6nt8t04l5n"]
+
+[ext_resource type="Script" uid="uid://daf2u3jbyk4bl" path="res://prefabs/UI/Inventory/inventory_slot_ui.gd" id="1_l1llf"]
+
+[node name="InventorySlotUI" type="PanelContainer" unique_id=22518857]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_l1llf")
+
+[node name="ItemIcon" type="TextureRect" parent="." unique_id=185302521]
+texture_filter = 1
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="QuantityLabel" type="Label" parent="." unique_id=837321697]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "10"

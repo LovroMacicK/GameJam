@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://cjbfnpcv4x4ew"]
-
-[ext_resource type="Script" uid="uid://cigwmqewk7db8" path="res://prefabs/UI/Inventory/inventory.gd" id="1_lfeqv"]
-[ext_resource type="PackedScene" uid="uid://cia6nt8t04l5n" path="res://prefabs/UI/Inventory/inventory_slot_ui.tscn" id="2_1afad"]
-
-[node name="Inventory" type="Node2D" unique_id=1273155148 node_paths=PackedStringArray("inventory")]
-script = ExtResource("1_lfeqv")
-inventory = NodePath(".")
-slot_scene = ExtResource("2_1afad")
