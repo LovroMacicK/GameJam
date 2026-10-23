@@ -20,6 +20,10 @@ var seeds_in_use: String = ""
 
 
 func _ready() -> void:
+	if inventory == null:
+		push_error("InventoryUI potrebuje povezavo do Inventory.")
+		return
+
 	inventory.inventory_changed.connect(update_count)
 	inventory.change_selected_slot_tools_inventory("scythe")
 	update_count()
@@ -61,6 +65,9 @@ func _input(event: InputEvent) -> void:
 
 
 func update_count() -> void:
+	if inventory == null:
+		return
+
 	slot_2_label.text = str(inventory.get_count("corn_seed"))
 	slot_3_label.text = str(inventory.get_count("eggplant_seed"))
 	slot_4_label.text = str(inventory.get_count("pumpkin_seed"))

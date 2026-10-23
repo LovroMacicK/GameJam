@@ -24,7 +24,7 @@ height = 95.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_nirye"]
 radius = 62.008064
 
-[node name="Player" type="CharacterBody2D" unique_id=1931862810]
+[node name="Player" type="CharacterBody2D" unique_id=1931862810 groups=["player"]]
 script = ExtResource("1_sxsrd")
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=691296988]

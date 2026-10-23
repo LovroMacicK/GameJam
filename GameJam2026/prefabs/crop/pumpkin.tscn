@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cwp1j4hu6t60j"]
+[gd_scene format=3 uid="uid://7etd875owf7k"]
 
 [ext_resource type="Script" uid="uid://8pmy2tpi5s50" path="res://prefabs/crop/Crop.gd" id="1_3wlrl"]
 [ext_resource type="Texture2D" uid="uid://dvuini1pvewjq" path="res://assets/items/Pumpkin-item.png" id="2_8go1t"]

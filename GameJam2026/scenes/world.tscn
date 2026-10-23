@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://cigwmqewk7db8" path="res://prefabs/UI/Inventory/inventory_ui.gd" id="3_qfnet"]
 [ext_resource type="Script" uid="uid://bxn570ey60yi2" path="res://prefabs/player/player.gd" id="5_2lf6f"]
 [ext_resource type="Texture2D" uid="uid://iud5lfp5pv3n" path="res://icon.svg" id="6_7iits"]
-[ext_resource type="Script" uid="uid://bfu8lu6eim8o7" path="res://prefabs/player/pickup_area.gd" id="7_oo54l"]
+[ext_resource type="Script" uid="uid://55xpvy2i58dx" path="res://prefabs/player/pickup_area.gd" id="7_oo54l"]
 [ext_resource type="Texture2D" uid="uid://3k667cyxanth" path="res://assets_placeholder/tileset/grass_w_track.png" id="7_w7kh3"]
-[ext_resource type="Script" uid="uid://72nvpn2ilgmi" path="res://scenes/inventory_seeds_ui.gd" id="10_dss4m"]
+[ext_resource type="Script" uid="uid://vcm7mlt655ng" path="res://scenes/inventory_seeds_ui.gd" id="10_dss4m"]
 [ext_resource type="Texture2D" uid="uid://gs0b6qiy4274" path="res://assets/items/SeedBagCorn-item.png" id="10_jhx03"]
 [ext_resource type="Texture2D" uid="uid://cmekaks03v364" path="res://assets/items/SeedBagPumpkin-item.png" id="10_xo05s"]
 [ext_resource type="PackedScene" uid="uid://bxd20k7i2guvt" path="res://prefabs/soil/FarmingPlot.tscn" id="11_e3hyu"]
@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dvuini1pvewjq" path="res://assets/items/Pumpkin-item.png" id="12_7t5mc"]
 [ext_resource type="Texture2D" uid="uid://yh0op4nn45wb" path="res://assets/items/Eggplant-item.png" id="13_lakw3"]
 [ext_resource type="Texture2D" uid="uid://cgcbj8c1rrn1t" path="res://assets/items/Corn-item.png" id="14_pm21f"]
-[ext_resource type="PackedScene" uid="uid://cwp1j4hu6t60j" path="res://prefabs/crop/pumpkin.tscn" id="17_pm21f"]
+[ext_resource type="PackedScene" uid="uid://7etd875owf7k" path="res://prefabs/crop/pumpkin.tscn" id="17_pm21f"]
 [ext_resource type="PackedScene" uid="uid://byctqxpxc1ute" path="res://prefabs/crop/corn.tscn" id="18_2lf6f"]
 [ext_resource type="PackedScene" uid="uid://c7ng1hwvtdnco" path="res://prefabs/crop/eggplant.tscn" id="19_7iits"]
 
@@ -90,7 +90,7 @@ sources/2 = SubResource("TileSetAtlasSource_jhx03")
 
 [node name="World" type="Node2D" unique_id=1949591470]
 
-[node name="player" type="CharacterBody2D" parent="." unique_id=1931862810 node_paths=PackedStringArray("inventory")]
+[node name="player" type="CharacterBody2D" parent="." unique_id=1931862810 node_paths=PackedStringArray("inventory") groups=["player"]]
 z_index = 1
 position = Vector2(622, 394)
 script = ExtResource("5_2lf6f")

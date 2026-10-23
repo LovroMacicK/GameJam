@@ -21,21 +21,22 @@ var selected_slot_inventory: int = -1
 
 
 func change_selected_slot_tools_inventory(item: String) -> void:
-	if item == tools_inventory[0]:
-		selected_slot_tools_inventory = 0
-	elif item == tools_inventory[1]:
-		selected_slot_tools_inventory = 1
+	var tool_index := tools_inventory.find(item)
+	if tool_index == -1:
+		return
+
+	selected_slot_tools_inventory = tool_index
 
 	selected_slot_inventory = -1
 
 
 func change_selected_slot_inventory(item: String) -> void:
-	if item == "pumpkin_seed":
-		selected_slot_inventory = 0
-	elif item == "corn_seed":
-		selected_slot_inventory = 1
-	elif item == "eggplant_seed":
-		selected_slot_inventory = 2
+	var seed_items := ["pumpkin_seed", "corn_seed", "eggplant_seed"]
+	var seed_index := seed_items.find(item)
+	if seed_index == -1:
+		return
+
+	selected_slot_inventory = seed_index
 
 	selected_slot_tools_inventory = -1
 
@@ -55,15 +56,19 @@ func get_selected_item() -> String:
 
 
 func remove(item: String, amount: int) -> void:
-	if inventory.has(item) && inventory[item] >= amount && amount > 0:
-		inventory[item] -= amount
-		inventory_changed.emit()
+	if amount <= 0 or not inventory.has(item) or inventory[item] < amount:
+		return
+
+	inventory[item] -= amount
+	inventory_changed.emit()
 
 
 func add(item: String, amount: int) -> void:
-	if inventory.has(item) && amount > 0 && inventory[item] + amount <= 64:
-		inventory[item] += amount
-		inventory_changed.emit()
+	if amount <= 0 or not inventory.has(item):
+		return
+
+	inventory[item] = mini(inventory[item] + amount, 64)
+	inventory_changed.emit()
 
 
 func get_count(item: String) -> int:

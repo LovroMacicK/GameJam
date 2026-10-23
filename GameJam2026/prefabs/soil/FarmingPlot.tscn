@@ -8,6 +8,7 @@ size = Vector2(43, 43)
 
 [node name="FarmingPlot" type="Area2D" unique_id=629343993]
 script = ExtResource("1_od1m5")
+input_pickable = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=32655674]
 texture_filter = 1

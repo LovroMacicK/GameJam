@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
-const SPEED: float = 10000.0
-const RUNNING_SPEED: float = 16000.0
+const SPEED: float = 200.0
+const RUNNING_SPEED: float = 320.0
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 
@@ -11,18 +11,18 @@ const RUNNING_SPEED: float = 16000.0
 var previous_state: String = "walk_front"
 
 
-func _physics_process(delta: float) -> void:
-	move(delta)
+func _physics_process(_delta: float) -> void:
+	move()
 
-func move(delta: float) -> void:
+func move() -> void:
 	var direction: Vector2 = Input.get_vector("left", "right", "up", "down")
 	
 	if Input.is_action_pressed("shift"):
-		velocity = direction.normalized() * RUNNING_SPEED * delta
+		velocity = direction.normalized() * RUNNING_SPEED
 	else:
-		velocity = direction.normalized() * SPEED * delta
+		velocity = direction.normalized() * SPEED
 	flip(direction)
-	#animation_state_machine(direction)
+	animation_state_machine(direction)
 	move_and_slide()
 
 func flip(direction: Vector2) -> void:
@@ -40,22 +40,31 @@ func animation_state_machine(direction: Vector2) -> void:
 			sprite.speed_scale = 1
 		
 		if direction.y > 0:
-			sprite.play("walk_front")
+			_play_animation("walk_front")
 			previous_state = "walk_front"
 
 		elif direction.y < 0:
-			sprite.play("walk_back")
+			_play_animation("walk_back")
 			previous_state = "walk_back"
 		
 		elif direction.y == 0 && direction.x != 0:
-			sprite.play("walk_side")
+			_play_animation("walk_side")
 		
 		else:
 			sprite.play(previous_state)
 
 	else:
 		if previous_state == "walk_front":
-			sprite.play("idle_front")
+			_play_animation("idle_front")
 
 		elif previous_state == "walk_back":
-			sprite.play("idle_back")
+			_play_animation("idle_back")
+
+func _play_animation(animation_name: String) -> void:
+	if sprite.sprite_frames == null:
+		return
+
+	if sprite.sprite_frames.has_animation(animation_name):
+		sprite.play(animation_name)
+	elif sprite.sprite_frames.has_animation("default"):
+		sprite.play("default")

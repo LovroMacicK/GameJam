@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cwp1j4hu6t60j"]
+
+[ext_resource type="Script" uid="uid://8pmy2tpi5s50" path="res://prefabs/crop/Crop.gd" id="1_vdokn"]
+
+[node name="Crop" type="Node2D" unique_id=416708157]
+script = ExtResource("1_vdokn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1393837908]
+
+[node name="GrowthTimer" type="Timer" parent="." unique_id=65058172]
+one_shot = true
+
+[connection signal="timeout" from="GrowthTimer" to="." method="_on_growth_timer_timeout"]
