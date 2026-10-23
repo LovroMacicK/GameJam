@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://cigwmqewk7db8" path="res://prefabs/UI/Inventory/inventory_ui.gd" id="1_jfcpn"]
 [ext_resource type="PackedScene" uid="uid://cia6nt8t04l5n" path="res://prefabs/UI/Inventory/InventorySlotUI.tscn" id="2_3a756"]
 [ext_resource type="Script" uid="uid://daf2u3jbyk4bl" path="res://prefabs/UI/Inventory/inventory_slot_ui.gd" id="2_jx076"]
-[ext_resource type="Texture2D" uid="uid://vd40inlkb6ma" path="res://assets_placeholder/tileset/grass.png" id="3_rtg0u"]
+[ext_resource type="Texture2D" uid="uid://vd40inlkb6ma" path="res://assets/tiles/grass.png" id="3_rtg0u"]
 [ext_resource type="Texture2D" uid="uid://3k667cyxanth" path="res://assets_placeholder/tileset/grass_w_track.png" id="4_kp8by"]
 
-[node name="InventoryUI" type="Control" unique_id=748619312 node_paths=PackedStringArray("inventory_slots")]
+[node name="InventoryUI" type="Control" unique_id=748619312]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jfcpn")
-inventory_slots = [NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_0"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_1"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_2"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_3"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_4"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_5"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_6"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_7"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_8"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_9"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_10"), NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_11")]
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1905037202]
 layout_mode = 1
