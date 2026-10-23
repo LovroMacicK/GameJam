@@ -3,6 +3,7 @@ class_name CropData extends Resource
 @export var crop_name: String
 @export var growth_time: float = 30.0
 
+# 1-Start, 2-Half-grown, 3-ready-to-harvest
 @export var growth_textures: Array[Texture2D]
 
 @export var harvest_item: ItemData

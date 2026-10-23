@@ -1,11 +1,10 @@
 class_name Inventory extends Node
 
-signal inventory_changed
-
 @export var inventory_size: int = 12
 
 var slots: Array[InventorySlot] = []
 
+signal inventory_changed
 
 func _ready() -> void:
 	initialize_inventory()
@@ -27,7 +26,6 @@ func add_item(item: ItemData, amount: int = 1) -> bool:
 
 	var available_space: int = 0
 
-	# Preverimo prostor v inventoryju
 	for slot in slots:
 		if slot.is_empty():
 			available_space += item.max_stack
@@ -41,7 +39,6 @@ func add_item(item: ItemData, amount: int = 1) -> bool:
 
 	var remaining: int = amount
 
-	# Najprej zapolnimo obstoječe stacke
 	for slot in slots:
 		if slot.item == item and slot.quantity < item.max_stack:
 			var space: int = item.max_stack - slot.quantity
@@ -54,7 +51,7 @@ func add_item(item: ItemData, amount: int = 1) -> bool:
 				inventory_changed.emit()
 				return true
 
-	# Nato zapolnimo prazne slote
+
 	for slot in slots:
 		if slot.is_empty():
 			var to_add: int = mini(item.max_stack, remaining)
@@ -110,7 +107,7 @@ func get_item_count(item: ItemData) -> int:
 
 
 func has_item(item: ItemData, amount: int = 1) -> bool:
-	if item == null or amount <= 0:
+	if item == null || amount <= 0:
 		return false
 
 	return get_item_count(item) >= amount

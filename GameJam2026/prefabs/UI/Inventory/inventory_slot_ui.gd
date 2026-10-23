@@ -3,32 +3,22 @@ class_name InventorySlotUI extends PanelContainer
 @onready var item_icon: TextureRect = $ItemIcon
 @onready var quantity_label: Label = $QuantityLabel
 
-var inventory_slot: InventorySlot = InventorySlot.new()
-@export var item_data_ex: ItemData
+var inventory_slot: InventorySlot
 
 signal slot_changed(slot: InventorySlot)
 
-func _ready() -> void:
-	inventory_slot.quantity = 5
-	inventory_slot.item = item_data_ex
-	update_slot(inventory_slot)
-
 func update_slot(slot: InventorySlot) -> void:
-	if slot.is_empty():
+	if slot == null || slot.is_empty():
 		item_icon.texture = null
 		quantity_label.text = "0"
 		return
 
 	item_icon.texture = slot.item.icon
-
-	if slot.quantity > 1:
-		quantity_label.text = str(slot.quantity)
-	else:
-		quantity_label.text = "0"
+	quantity_label.text = str(slot.quantity)
 
 func _get_drag_data(at_position: Vector2) -> Variant:
 	
-	if inventory_slot.is_empty():
+	if inventory_slot == null || inventory_slot.is_empty():
 		return null
 	
 	var preview: TextureRect = TextureRect.new()

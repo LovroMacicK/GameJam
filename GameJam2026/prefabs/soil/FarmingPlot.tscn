@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bxd20k7i2guvt"]
+
+[ext_resource type="Script" uid="uid://brchv1epkd1m1" path="res://prefabs/soil/farming_plot.gd" id="1_od1m5"]
+[ext_resource type="Texture2D" uid="uid://bm3irmwldqu75" path="res://assets_placeholder/tileset/plot.png" id="2_sgsnj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3h5jr"]
+size = Vector2(43, 43)
+
+[node name="FarmingPlot" type="Area2D" unique_id=629343993]
+script = ExtResource("1_od1m5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=32655674]
+texture_filter = 1
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_sgsnj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=250012633]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_3h5jr")
+
+[node name="CropContainer" type="Node2D" parent="." unique_id=1230257592]
