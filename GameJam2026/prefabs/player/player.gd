@@ -4,9 +4,9 @@ class_name Player
 const SPEED: float = 10000.0
 const RUNNING_SPEED: float = 16000.0
 
-var hasSeeds: bool = true
-
 @onready var sprite: AnimatedSprite2D = $Sprite
+
+@export var inventory: Inventory
 
 var previous_state: String = "walk_front"
 

@@ -1,120 +1,70 @@
 class_name Inventory extends Node
 
-@export var inventory_size: int = 12
-
-var slots: Array[InventorySlot] = []
-
 signal inventory_changed
 
-func _ready() -> void:
-	initialize_inventory()
+var inventory: Dictionary = {
+	"pumpkin_seed": 5, #0
+	"corn_seed": 0, #1
+	"eggplant_seed": 0, #2
+	"pumpkin": 0, #3
+	"corn": 0, #4
+	"eggplant": 0 #5
+}
+
+var tools_inventory: Array[String] = [
+	"scythe", #0
+	"watering_can" #1
+]
+
+var selected_slot_tools_inventory: int = -1
+var selected_slot_inventory: int = -1
 
 
-func initialize_inventory() -> void:
-	slots.clear()
+func change_selected_slot_tools_inventory(item: String) -> void:
+	if item == tools_inventory[0]:
+		selected_slot_tools_inventory = 0
+	elif item == tools_inventory[1]:
+		selected_slot_tools_inventory = 1
 
-	for i in range(inventory_size):
-		var slot = InventorySlot.new()
-		slots.append(slot)
-
-	inventory_changed.emit()
-
-
-func add_item(item: ItemData, amount: int = 1) -> bool:
-	if item == null or amount <= 0:
-		return false
-
-	var available_space: int = 0
-
-	for slot in slots:
-		if slot.is_empty():
-			available_space += item.max_stack
-		elif slot.item == item:
-			available_space += maxi(
-				item.max_stack - slot.quantity, 0
-			)
-
-	if available_space < amount:
-		return false
-
-	var remaining: int = amount
-
-	for slot in slots:
-		if slot.item == item and slot.quantity < item.max_stack:
-			var space: int = item.max_stack - slot.quantity
-			var to_add: int = mini(space, remaining)
-
-			slot.quantity += to_add
-			remaining -= to_add
-
-			if remaining == 0:
-				inventory_changed.emit()
-				return true
+	selected_slot_inventory = -1
 
 
-	for slot in slots:
-		if slot.is_empty():
-			var to_add: int = mini(item.max_stack, remaining)
+func change_selected_slot_inventory(item: String) -> void:
+	if item == "pumpkin_seed":
+		selected_slot_inventory = 0
+	elif item == "corn_seed":
+		selected_slot_inventory = 1
+	elif item == "eggplant_seed":
+		selected_slot_inventory = 2
 
-			slot.item = item
-			slot.quantity = to_add
-			remaining -= to_add
-
-			if remaining == 0:
-				inventory_changed.emit()
-				return true
-
-	return false
+	selected_slot_tools_inventory = -1
 
 
-func remove_item(item: ItemData, amount: int = 1) -> bool:
-	if item == null or amount <= 0:
-		return false
+func get_selected_item() -> String:
+	if selected_slot_tools_inventory != -1:
+		return tools_inventory[selected_slot_tools_inventory]
 
-	if not has_item(item, amount):
-		return false
+	if selected_slot_inventory == 0:
+		return "pumpkin_seed"
+	elif selected_slot_inventory == 1:
+		return "corn_seed"
+	elif selected_slot_inventory == 2:
+		return "eggplant_seed"
 
-	var remaining: int = amount
-
-	for slot in slots:
-		if slot.item == item:
-			var to_remove: int = mini(slot.quantity, remaining)
-
-			slot.quantity -= to_remove
-			remaining -= to_remove
-
-			if slot.quantity <= 0:
-				slot.clear()
-
-			if remaining == 0:
-				inventory_changed.emit()
-				return true
-
-	return false
+	return ""
 
 
-func get_item_count(item: ItemData) -> int:
-	if item == null:
-		return 0
-
-	var total: int = 0
-
-	for slot in slots:
-		if slot.item == item:
-			total += slot.quantity
-
-	return total
+func remove(item: String, amount: int) -> void:
+	if inventory.has(item) && inventory[item] >= amount && amount > 0:
+		inventory[item] -= amount
+		inventory_changed.emit()
 
 
-func has_item(item: ItemData, amount: int = 1) -> bool:
-	if item == null || amount <= 0:
-		return false
+func add(item: String, amount: int) -> void:
+	if inventory.has(item) && amount > 0 && inventory[item] + amount <= 64:
+		inventory[item] += amount
+		inventory_changed.emit()
 
-	return get_item_count(item) >= amount
 
-
-func clear_inventory() -> void:
-	for slot in slots:
-		slot.clear()
-
-	inventory_changed.emit()
+func get_count(item: String) -> int:
+	return inventory.get(item, 0)

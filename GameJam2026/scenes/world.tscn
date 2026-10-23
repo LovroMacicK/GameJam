@@ -1,29 +1,44 @@
 [gd_scene format=4 uid="uid://crpky87qkb8t6"]
 
-[ext_resource type="Script" uid="uid://qseheus8kvko" path="res://scenes/main.gd" id="1_4mrxx"]
-[ext_resource type="PackedScene" uid="uid://4tyi5jyb40sk" path="res://prefabs/player/Player.tscn" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://cu6eip0qkser6" path="res://prefabs/UI/Inventory/Inventory.tscn" id="1_qfnet"]
-[ext_resource type="Script" uid="uid://vr88d5k4miwb" path="res://scripts/crop_data.gd" id="2_w7kh3"]
 [ext_resource type="Texture2D" uid="uid://vd40inlkb6ma" path="res://assets/tiles/grass.png" id="3_k0juu"]
 [ext_resource type="Script" uid="uid://cigwmqewk7db8" path="res://prefabs/UI/Inventory/inventory_ui.gd" id="3_qfnet"]
-[ext_resource type="Script" uid="uid://daf2u3jbyk4bl" path="res://prefabs/UI/Inventory/inventory_slot_ui.gd" id="4_71j4m"]
-[ext_resource type="Script" uid="uid://ps5mspmi5gt3" path="res://scripts/item_data.gd" id="6_7r4gi"]
+[ext_resource type="Script" uid="uid://bxn570ey60yi2" path="res://prefabs/player/player.gd" id="5_2lf6f"]
+[ext_resource type="Texture2D" uid="uid://iud5lfp5pv3n" path="res://icon.svg" id="6_7iits"]
+[ext_resource type="Script" uid="uid://bfu8lu6eim8o7" path="res://prefabs/player/pickup_area.gd" id="7_oo54l"]
 [ext_resource type="Texture2D" uid="uid://3k667cyxanth" path="res://assets_placeholder/tileset/grass_w_track.png" id="7_w7kh3"]
-[ext_resource type="PackedScene" uid="uid://cia6nt8t04l5n" path="res://prefabs/UI/Inventory/InventorySlotUI.tscn" id="8_e3hyu"]
+[ext_resource type="Script" uid="uid://72nvpn2ilgmi" path="res://scenes/inventory_seeds_ui.gd" id="10_dss4m"]
+[ext_resource type="Texture2D" uid="uid://gs0b6qiy4274" path="res://assets/items/SeedBagCorn-item.png" id="10_jhx03"]
+[ext_resource type="Texture2D" uid="uid://cmekaks03v364" path="res://assets/items/SeedBagPumpkin-item.png" id="10_xo05s"]
 [ext_resource type="PackedScene" uid="uid://bxd20k7i2guvt" path="res://prefabs/soil/FarmingPlot.tscn" id="11_e3hyu"]
+[ext_resource type="Texture2D" uid="uid://cbhxk7u70m1eb" path="res://assets/items/SeedBagEggplant-item.png" id="11_o8fc1"]
+[ext_resource type="Texture2D" uid="uid://dwvk4jl2w36qm" path="res://assets/tiles/Tilemap.png" id="11_q5onr"]
+[ext_resource type="Texture2D" uid="uid://dvuini1pvewjq" path="res://assets/items/Pumpkin-item.png" id="12_7t5mc"]
+[ext_resource type="Texture2D" uid="uid://yh0op4nn45wb" path="res://assets/items/Eggplant-item.png" id="13_lakw3"]
+[ext_resource type="Texture2D" uid="uid://cgcbj8c1rrn1t" path="res://assets/items/Corn-item.png" id="14_pm21f"]
+[ext_resource type="PackedScene" uid="uid://cwp1j4hu6t60j" path="res://prefabs/crop/pumpkin.tscn" id="17_pm21f"]
+[ext_resource type="PackedScene" uid="uid://byctqxpxc1ute" path="res://prefabs/crop/corn.tscn" id="18_2lf6f"]
+[ext_resource type="PackedScene" uid="uid://c7ng1hwvtdnco" path="res://prefabs/crop/eggplant.tscn" id="19_7iits"]
 
-[sub_resource type="Resource" id="Resource_7r4gi"]
-script = ExtResource("2_w7kh3")
-crop_name = "adsdfds"
-metadata/_custom_type_script = "uid://vr88d5k4miwb"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nirye"]
 
-[sub_resource type="Resource" id="Resource_4mrxx"]
-script = ExtResource("6_7r4gi")
-id = "fdgdas"
-item_name = "hdfsdds"
-icon = ExtResource("3_k0juu")
-crop_data = SubResource("Resource_7r4gi")
-metadata/_custom_type_script = "uid://ps5mspmi5gt3"
+[sub_resource type="SpriteFrames" id="SpriteFrames_wrjoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7iits")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_plg1o"]
+radius = 22.5
+height = 95.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nirye"]
+radius = 62.008064
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w7kh3"]
 texture = ExtResource("3_k0juu")
@@ -63,17 +78,49 @@ texture = ExtResource("7_w7kh3")
 2:3/0 = 0
 3:3/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhx03"]
+texture = ExtResource("11_q5onr")
+30:17/0 = 0
+26:20/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_w7kh3"]
 sources/0 = SubResource("TileSetAtlasSource_w7kh3")
 sources/1 = SubResource("TileSetAtlasSource_e3hyu")
+sources/2 = SubResource("TileSetAtlasSource_jhx03")
 
 [node name="World" type="Node2D" unique_id=1949591470]
-script = ExtResource("1_4mrxx")
-pumpkin_seed = SubResource("Resource_4mrxx")
 
-[node name="player" parent="." unique_id=1931862810 instance=ExtResource("1_nnsk1")]
+[node name="player" type="CharacterBody2D" parent="." unique_id=1931862810 node_paths=PackedStringArray("inventory")]
 z_index = 1
 position = Vector2(622, 394)
+script = ExtResource("5_2lf6f")
+inventory = NodePath("../Inventory")
+
+[node name="Collider" type="CollisionShape2D" parent="player" unique_id=691296988]
+shape = SubResource("RectangleShape2D_nirye")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="player" unique_id=696891595]
+texture_filter = 1
+scale = Vector2(0.5, 0.494)
+sprite_frames = SubResource("SpriteFrames_wrjoq")
+
+[node name="Camera" type="Camera2D" parent="player" unique_id=1847709986]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Hitbox" type="Area2D" parent="player" unique_id=1216360159]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/Hitbox" unique_id=712556259]
+position = Vector2(0.5, 28.5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_plg1o")
+
+[node name="PickupArea" type="Area2D" parent="player" unique_id=1773272358]
+script = ExtResource("7_oo54l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/PickupArea" unique_id=147312150]
+shape = SubResource("CircleShape2D_nirye")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="player" unique_id=309818668]
 
@@ -82,27 +129,26 @@ layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -103.0
-offset_right = 467.0
+offset_top = -575.0
+offset_right = 1198.0
 grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
+mouse_filter = 2
 script = ExtResource("3_qfnet")
 inventory = NodePath("../../../Inventory")
 
 [node name="PanelContainer" type="PanelContainer" parent="player/CanvasLayer/InventoryUI" unique_id=1905037202]
+texture_filter = 1
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -45.5
-offset_top = -24.5
-offset_right = 45.5
-offset_bottom = 24.5
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -90.0
+offset_right = 222.0
+offset_bottom = -10.0
+grow_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="player/CanvasLayer/InventoryUI/PanelContainer" unique_id=302873399]
 layout_mode = 2
@@ -120,9 +166,9 @@ layout_mode = 2
 columns = 6
 
 [node name="Slot_0" type="PanelContainer" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1230661757]
+texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-script = ExtResource("4_71j4m")
 
 [node name="ItemIcon" type="TextureRect" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_0" unique_id=702105351]
 texture_filter = 1
@@ -132,16 +178,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_k0juu")
 
-[node name="QuantityLabel" type="Label" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_0" unique_id=1337676521]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-text = "10"
-
 [node name="Slot_1" type="PanelContainer" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1805616588]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-script = ExtResource("4_71j4m")
 
 [node name="ItemIcon" type="TextureRect" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_1" unique_id=1133094933]
 texture_filter = 1
@@ -151,41 +190,147 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("7_w7kh3")
 
-[node name="QuantityLabel" type="Label" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_1" unique_id=215579802]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-text = "10"
-
 [node name="Slot_2" type="PanelContainer" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1725599683]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-script = ExtResource("4_71j4m")
 
 [node name="ItemIcon" type="TextureRect" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_2" unique_id=1835342909]
 texture_filter = 1
-custom_maximum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture = ExtResource("10_jhx03")
 
-[node name="QuantityLabel" type="Label" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_2" unique_id=94709945]
+[node name="QuantityLabel" type="Label" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_2" unique_id=533432394]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "10"
 
-[node name="Slot_3" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=588093114 instance=ExtResource("8_e3hyu")]
+[node name="Slot_3" type="PanelContainer" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=588093114]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="Slot_4" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1488205884 instance=ExtResource("8_e3hyu")]
+[node name="ItemIcon" type="TextureRect" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_3" unique_id=185302521]
+texture_filter = 1
+custom_maximum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_o8fc1")
+
+[node name="QuantityLabel" type="Label" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_3" unique_id=837321697]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "10"
+
+[node name="Slot_4" type="PanelContainer" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1488205884]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="Slot_5" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1061286242 instance=ExtResource("8_e3hyu")]
+[node name="ItemIcon" type="TextureRect" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_4" unique_id=725708565]
+texture_filter = 1
+custom_maximum_size = Vector2(64, 64)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("10_xo05s")
+
+[node name="QuantityLabel" type="Label" parent="player/CanvasLayer/InventoryUI/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_4" unique_id=1405158836]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "10"
+
+[node name="InventorySeedsUI" type="Control" parent="player/CanvasLayer" unique_id=2076170629 node_paths=PackedStringArray("inventory")]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_top = 24.0
+offset_right = -10.0
+offset_bottom = 64.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("10_dss4m")
+inventory = NodePath("../../../Inventory")
+
+[node name="PumpkinSeeds" type="VBoxContainer" parent="player/CanvasLayer/InventorySeedsUI" unique_id=1615036003]
+layout_mode = 0
+offset_left = -42.0
+offset_top = -19.0
+offset_right = 48.0
+offset_bottom = 71.0
+
+[node name="TextureRect" type="TextureRect" parent="player/CanvasLayer/InventorySeedsUI/PumpkinSeeds" unique_id=663328108]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("12_7t5mc")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="player/CanvasLayer/InventorySeedsUI/PumpkinSeeds/TextureRect" unique_id=1153802389]
+layout_mode = 0
+offset_left = -27.0
+offset_top = 48.0
+offset_right = 63.0
+offset_bottom = 71.0
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="EggplantSeeds" type="VBoxContainer" parent="player/CanvasLayer/InventorySeedsUI" unique_id=748218425]
+layout_mode = 0
+offset_left = -42.0
+offset_top = 71.0
+offset_right = 48.0
+offset_bottom = 161.0
+
+[node name="TextureRect" type="TextureRect" parent="player/CanvasLayer/InventorySeedsUI/EggplantSeeds" unique_id=727459108]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("13_lakw3")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="player/CanvasLayer/InventorySeedsUI/EggplantSeeds/TextureRect" unique_id=1947267686]
+layout_mode = 0
+offset_left = -27.0
+offset_top = 48.0
+offset_right = 63.0
+offset_bottom = 71.0
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="CornSeeds" type="VBoxContainer" parent="player/CanvasLayer/InventorySeedsUI" unique_id=1165390481]
+layout_mode = 0
+offset_left = -42.0
+offset_top = 161.0
+offset_right = 48.0
+offset_bottom = 251.0
+
+[node name="TextureRect" type="TextureRect" parent="player/CanvasLayer/InventorySeedsUI/CornSeeds" unique_id=681241215]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("14_pm21f")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="player/CanvasLayer/InventorySeedsUI/CornSeeds/TextureRect" unique_id=1726646250]
+layout_mode = 0
+offset_left = -27.0
+offset_top = 48.0
+offset_right = 63.0
+offset_bottom = 71.0
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="Inventory" parent="." unique_id=1881903355 instance=ExtResource("1_qfnet")]
-inventory_size = 6
 
 [node name="Tilemap" type="Node2D" parent="." unique_id=686378728]
 
@@ -196,20 +341,44 @@ tile_set = SubResource("TileSet_w7kh3")
 [node name="FarmingPlots" type="Node2D" parent="." unique_id=626877471]
 position = Vector2(292.365, 292)
 
-[node name="FarmingPlot2" parent="FarmingPlots" unique_id=14319274 instance=ExtResource("11_e3hyu")]
+[node name="FarmingPlot2" parent="FarmingPlots" unique_id=14319274 node_paths=PackedStringArray("inventory") instance=ExtResource("11_e3hyu")]
 position = Vector2(13.63501, 0)
+inventory = NodePath("../../Inventory")
+pumpkin_scene = ExtResource("17_pm21f")
+corn_scene = ExtResource("18_2lf6f")
+eggplant_scene = ExtResource("19_7iits")
 
-[node name="FarmingPlot" parent="FarmingPlots" unique_id=629343993 instance=ExtResource("11_e3hyu")]
+[node name="FarmingPlot" parent="FarmingPlots" unique_id=629343993 node_paths=PackedStringArray("inventory") instance=ExtResource("11_e3hyu")]
 position = Vector2(13.63501, 43)
+inventory = NodePath("../../Inventory")
+pumpkin_scene = ExtResource("17_pm21f")
+corn_scene = ExtResource("18_2lf6f")
+eggplant_scene = ExtResource("19_7iits")
 
-[node name="FarmingPlot3" parent="FarmingPlots" unique_id=79655598 instance=ExtResource("11_e3hyu")]
+[node name="FarmingPlot3" parent="FarmingPlots" unique_id=79655598 node_paths=PackedStringArray("inventory") instance=ExtResource("11_e3hyu")]
 position = Vector2(56.63501, 43)
+inventory = NodePath("../../Inventory")
+pumpkin_scene = ExtResource("17_pm21f")
+corn_scene = ExtResource("18_2lf6f")
+eggplant_scene = ExtResource("19_7iits")
 
-[node name="FarmingPlot4" parent="FarmingPlots" unique_id=1558174510 instance=ExtResource("11_e3hyu")]
+[node name="FarmingPlot4" parent="FarmingPlots" unique_id=1558174510 node_paths=PackedStringArray("inventory") instance=ExtResource("11_e3hyu")]
 position = Vector2(99.63501, 43)
+inventory = NodePath("../../Inventory")
+pumpkin_scene = ExtResource("17_pm21f")
+corn_scene = ExtResource("18_2lf6f")
+eggplant_scene = ExtResource("19_7iits")
 
-[node name="FarmingPlot5" parent="FarmingPlots" unique_id=1088428683 instance=ExtResource("11_e3hyu")]
+[node name="FarmingPlot5" parent="FarmingPlots" unique_id=1088428683 node_paths=PackedStringArray("inventory") instance=ExtResource("11_e3hyu")]
 position = Vector2(56.63501, 0)
+inventory = NodePath("../../Inventory")
+pumpkin_scene = ExtResource("17_pm21f")
+corn_scene = ExtResource("18_2lf6f")
+eggplant_scene = ExtResource("19_7iits")
 
-[node name="FarmingPlot6" parent="FarmingPlots" unique_id=1332495504 instance=ExtResource("11_e3hyu")]
+[node name="FarmingPlot6" parent="FarmingPlots" unique_id=1332495504 node_paths=PackedStringArray("inventory") instance=ExtResource("11_e3hyu")]
 position = Vector2(99.63501, 0)
+inventory = NodePath("../../Inventory")
+pumpkin_scene = ExtResource("17_pm21f")
+corn_scene = ExtResource("18_2lf6f")
+eggplant_scene = ExtResource("19_7iits")

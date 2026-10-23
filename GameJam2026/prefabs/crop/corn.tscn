@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://byctqxpxc1ute"]
+
+[ext_resource type="Script" uid="uid://8pmy2tpi5s50" path="res://prefabs/crop/Crop.gd" id="1_y71a3"]
+[ext_resource type="Texture2D" uid="uid://cgcbj8c1rrn1t" path="res://assets/items/Corn-item.png" id="2_u8g8d"]
+
+[node name="corn" type="Node2D" unique_id=980667216]
+script = ExtResource("1_y71a3")
+crop_name = "corn"
+growth_time = 3.0
+growth_textures = Array[Texture2D]([ExtResource("2_u8g8d"), ExtResource("2_u8g8d"), ExtResource("2_u8g8d")])
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1393837908]
+texture_filter = 1
+texture = ExtResource("2_u8g8d")
+
+[node name="GrowthTimer" type="Timer" parent="." unique_id=65058172]
+one_shot = true
+
+[connection signal="timeout" from="GrowthTimer" to="." method="_on_growth_timer_timeout"]

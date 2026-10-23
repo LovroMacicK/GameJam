@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c7ng1hwvtdnco"]
+
+[ext_resource type="Script" uid="uid://8pmy2tpi5s50" path="res://prefabs/crop/Crop.gd" id="1_70dgo"]
+[ext_resource type="Texture2D" uid="uid://yh0op4nn45wb" path="res://assets/items/Eggplant-item.png" id="2_hw86c"]
+
+[node name="eggplant" type="Node2D" unique_id=62204104]
+script = ExtResource("1_70dgo")
+crop_name = "eggplant"
+growth_time = 3.0
+growth_textures = Array[Texture2D]([ExtResource("2_hw86c"), ExtResource("2_hw86c"), ExtResource("2_hw86c")])
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1886007616]
+texture_filter = 1
+texture = ExtResource("2_hw86c")
+
+[node name="GrowthTimer" type="Timer" parent="." unique_id=1896404962]
+one_shot = true
+
+[connection signal="timeout" from="GrowthTimer" to="." method="_on_growth_timer_timeout"]

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cwp1j4hu6t60j"]
+
+[ext_resource type="Script" uid="uid://8pmy2tpi5s50" path="res://prefabs/crop/Crop.gd" id="1_3wlrl"]
+[ext_resource type="Texture2D" uid="uid://dvuini1pvewjq" path="res://assets/items/Pumpkin-item.png" id="2_8go1t"]
+
+[node name="pumpkin" type="Node2D" unique_id=416708157]
+script = ExtResource("1_3wlrl")
+crop_name = "pumpkin"
+growth_time = 3.0
+growth_textures = Array[Texture2D]([ExtResource("2_8go1t"), ExtResource("2_8go1t"), ExtResource("2_8go1t")])
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1393837908]
+texture_filter = 1
+texture = ExtResource("2_8go1t")
+
+[node name="GrowthTimer" type="Timer" parent="." unique_id=65058172]
+one_shot = true
+
+[connection signal="timeout" from="GrowthTimer" to="." method="_on_growth_timer_timeout"]

@@ -7,5 +7,6 @@
 		"**/.DS_Store": true,
 		"**/Thumbs.db": true
 	},
-	"hide-files.files": []
+	"hide-files.files": [],
+	"godotToolsCsharp.editorPath.godot4": "c:\\Users\\lovro\\Downloads\\Godot_v4.7.1-stable_mono_win64\\Godot_v4.7.1-stable_mono_win64\\Godot_v4.7.1-stable_mono_win64.exe"
 }
