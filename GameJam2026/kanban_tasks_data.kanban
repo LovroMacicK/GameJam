@@ -1,0 +1,99 @@
+{
+	"categories": [
+		{
+			"uuid": "936797f5-cdae-4ab5-aab4-a7f09e0a6ade",
+			"title": "Task",
+			"color": "0078d4"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "0b7f7042-4c6c-4c42-bf84-bb9480a98644",
+			"title": "Todo",
+			"tasks": [
+				"0e6d0a9e-65d1-428d-b1db-b54c1243acb4",
+				"380df1cc-9795-43ff-8f87-6adcb4af8c30",
+				"e862b4f3-fb24-4092-aee8-c4b265d5fb58",
+				"c1065023-3eb4-4458-9702-29dcf6a31ab3",
+				"aba2c135-ce99-4e35-9f93-b4bed3f3d76f",
+				"8d4f67e9-34b2-4de8-8c80-70df09ca40e6"
+			]
+		},
+		{
+			"uuid": "e1eaadcf-16a6-428a-9791-a61c6f5e21ae",
+			"title": "Doing",
+			"tasks": [
+				"c4ad6e8e-c910-493f-a51a-0433eb0eafad"
+			]
+		},
+		{
+			"uuid": "7da31bfb-e1da-45a2-9506-607d54854889",
+			"title": "Done",
+			"tasks": []
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "0e6d0a9e-65d1-428d-b1db-b54c1243acb4",
+			"title": "Enemy Spawner",
+			"description": "",
+			"category": "936797f5-cdae-4ab5-aab4-a7f09e0a6ade",
+			"steps": []
+		},
+		{
+			"uuid": "c4ad6e8e-c910-493f-a51a-0433eb0eafad",
+			"title": "Fix Enemy AI",
+			"description": "",
+			"category": "936797f5-cdae-4ab5-aab4-a7f09e0a6ade",
+			"steps": []
+		},
+		{
+			"uuid": "380df1cc-9795-43ff-8f87-6adcb4af8c30",
+			"title": "Store",
+			"description": "",
+			"category": "936797f5-cdae-4ab5-aab4-a7f09e0a6ade",
+			"steps": []
+		},
+		{
+			"uuid": "e862b4f3-fb24-4092-aee8-c4b265d5fb58",
+			"title": "Game Over screen",
+			"description": "",
+			"category": "936797f5-cdae-4ab5-aab4-a7f09e0a6ade",
+			"steps": []
+		},
+		{
+			"uuid": "c1065023-3eb4-4458-9702-29dcf6a31ab3",
+			"title": "Final map",
+			"description": "",
+			"category": "936797f5-cdae-4ab5-aab4-a7f09e0a6ade",
+			"steps": []
+		},
+		{
+			"uuid": "aba2c135-ce99-4e35-9f93-b4bed3f3d76f",
+			"title": "Dodaj attack",
+			"description": "",
+			"category": "936797f5-cdae-4ab5-aab4-a7f09e0a6ade",
+			"steps": []
+		},
+		{
+			"uuid": "8d4f67e9-34b2-4de8-8c80-70df09ca40e6",
+			"title": "Dodaj watering",
+			"description": "",
+			"category": "936797f5-cdae-4ab5-aab4-a7f09e0a6ade",
+			"steps": []
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"0b7f7042-4c6c-4c42-bf84-bb9480a98644"
+			],
+			[
+				"e1eaadcf-16a6-428a-9791-a61c6f5e21ae"
+			],
+			[
+				"7da31bfb-e1da-45a2-9506-607d54854889"
+			]
+		]
+	}
+}

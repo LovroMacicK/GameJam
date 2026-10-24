@@ -7,12 +7,25 @@ const RUNNING_SPEED: float = 320.0
 @onready var sprite: AnimatedSprite2D = $Sprite
 
 @export var inventory: Inventory
+@export var health: int
+
+var isAlive: bool
+var isAttacking: bool
 
 var previous_state: String = "walk_front"
 
 
+func _ready() -> void:
+	isAlive = true
+
+
 func _physics_process(_delta: float) -> void:
-	move()
+	if isAlive:
+		move()
+		if Input.is_action_just_pressed("left_click"):
+			attack()
+	else:
+		print("DEAD")
 
 
 func move() -> void:
@@ -35,16 +48,18 @@ func flip(direction: Vector2) -> void:
 
 
 func animation_state_machine(direction: Vector2) -> void:
+	if isAttacking:
+		return
+
 	if direction != Vector2.ZERO:
 		if Input.is_action_pressed("shift"):
 			sprite.speed_scale = 1.8
 		else:
 			sprite.speed_scale = 1
 
-	if direction == Vector2.ZERO:
-		_play_animation("idle")
-	else:
 		_play_animation("walk_front")
+	else:
+		_play_animation("idle")
 
 
 func _play_animation(animation_name: String) -> void:
@@ -55,3 +70,26 @@ func _play_animation(animation_name: String) -> void:
 		sprite.play(animation_name)
 	elif sprite.sprite_frames.has_animation("idle"):
 		sprite.play("idle")
+
+
+func attack() -> void:
+	if isAttacking:
+		return
+
+	isAttacking = true
+	velocity = Vector2.ZERO
+	sprite.speed_scale = 1.0
+	_play_animation("attack")
+
+
+func take_damage(damage: int) -> void:
+	print(health)
+	if (health - damage) > 0:
+		health -= damage
+	else:
+		isAlive == false
+
+
+func _on_sprite_animation_finished() -> void:
+	if sprite.animation == "attack":
+		isAttacking = false

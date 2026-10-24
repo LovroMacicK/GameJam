@@ -1,13 +1,16 @@
 class_name InventorySeedsUI extends Control
 
-@onready var pumpkin_count: Label = $PumpkinSeeds/TextureRect/Label
-@onready var eggplant_count: Label = $EggplantSeeds/TextureRect/Label
-@onready var corn_count: Label = $CornSeeds/TextureRect/Label
+@onready var pumpkin_count: Label = $Pumpkin/TextureRect/Label
+@onready var eggplant_count: Label = $Eggplant/TextureRect/Label
+@onready var corn_count: Label = $Corn/TextureRect/Label
+@export var coin_count: Label
 
 @export var inventory: Inventory
 
+
 func _process(_delta: float) -> void:
 	refresh_count()
+
 
 func refresh_count() -> void:
 	if inventory == null:
@@ -16,3 +19,4 @@ func refresh_count() -> void:
 	pumpkin_count.text = str(inventory.get_count("pumpkin"))
 	eggplant_count.text = str(inventory.get_count("eggplant"))
 	corn_count.text = str(inventory.get_count("corn"))
+	coin_count.text = str(inventory.get_count("coins"))

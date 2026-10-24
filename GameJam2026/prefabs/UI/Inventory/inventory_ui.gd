@@ -2,17 +2,11 @@ class_name InventoryUI extends Control
 
 @export var inventory: Inventory
 
-@onready var slot_2_label: Label = $PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_2/QuantityLabel
-@onready var slot_3_label: Label = $PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_3/QuantityLabel
-@onready var slot_4_label: Label = $PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_4/QuantityLabel
+@onready var slot_2_label: Label = %QuantityLabel_Slot_2
+@onready var slot_3_label: Label = %QuantityLabel_Slot_3
+@onready var slot_4_label: Label = %QuantityLabel_Slot_4
 
-@onready var grids: Array[PanelContainer] = [
-	$PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_0,
-	$PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_1,
-	$PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_2,
-	$PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_3,
-	$PanelContainer/MarginContainer/VBoxContainer/GridContainer/Slot_4
-]
+@onready var grids: Array[PanelContainer] = [%Slot_0, %Slot_1, %Slot_2, %Slot_3, %Slot_4]
 
 var current_slot: int = 0
 var item_in_use: String = ""

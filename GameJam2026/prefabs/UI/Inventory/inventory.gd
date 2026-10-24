@@ -8,12 +8,13 @@ var inventory: Dictionary = {
 	"eggplant_seed": 5, #2
 	"pumpkin": 0, #3
 	"corn": 0, #4
-	"eggplant": 0 #5
+	"eggplant": 0, #5
+	"coins": 10, #6
 }
 
 var tools_inventory: Array[String] = [
 	"scythe", #0
-	"watering_can" #1
+	"watering_can", #1
 ]
 
 var selected_slot_tools_inventory: int = -1

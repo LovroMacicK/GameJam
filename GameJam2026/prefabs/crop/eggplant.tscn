@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://c7ng1hwvtdnco"]
 
 [ext_resource type="Script" uid="uid://8pmy2tpi5s50" path="res://prefabs/crop/Crop.gd" id="1_70dgo"]
+[ext_resource type="Texture2D" uid="uid://baojqcfkwul4r" path="res://assets/items/Eggplant-Plant/Eggplant-sprout.png" id="2_gsoto"]
 [ext_resource type="Texture2D" uid="uid://yh0op4nn45wb" path="res://assets/items/Eggplant-item.png" id="2_hw86c"]
+[ext_resource type="Texture2D" uid="uid://bh7rlvt7m16i3" path="res://assets/items/Eggplant-Plant/Eggplant-growing.png" id="3_njrw5"]
+[ext_resource type="Texture2D" uid="uid://q260c3gbhpn7" path="res://assets/items/Eggplant-Plant/Eggplant-grown.png" id="4_y2fp7"]
 
 [node name="eggplant" type="Node2D" unique_id=62204104]
 script = ExtResource("1_70dgo")
 crop_name = "eggplant"
 growth_time = 3.0
-growth_textures = Array[Texture2D]([ExtResource("2_hw86c"), ExtResource("2_hw86c"), ExtResource("2_hw86c")])
+growth_textures = Array[Texture2D]([ExtResource("2_gsoto"), ExtResource("3_njrw5"), ExtResource("4_y2fp7")])
+growth_offsets_y = Array[int]([0, -32, -32])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1886007616]
 texture_filter = 1

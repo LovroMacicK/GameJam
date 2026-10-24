@@ -4,6 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://brkmol7bdt7vb" path="res://assets/enemy/spider/SpiderEnemy-Attack.png" id="2_iq5a2"]
 [ext_resource type="Texture2D" uid="uid://bfl1k1w2wawha" path="res://assets/enemy/spider/SpiderEnemy-idle.png" id="2_iy1tj"]
 [ext_resource type="Texture2D" uid="uid://bflb444vtgmri" path="res://assets/enemy/spider/SpiderEnemy-Walk.png" id="3_iy1tj"]
+[ext_resource type="Script" uid="uid://dcdoh4hhvosy7" path="res://prefabs/enemies/spider_enemy/attack_area.gd" id="5_mdqj2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8lf6"]
+radius = 14.09289
+height = 73.6599
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gkqs3"]
 atlas = ExtResource("2_iq5a2")
@@ -45,39 +50,39 @@ region = Rect2(1024, 0, 128, 128)
 atlas = ExtResource("2_iq5a2")
 region = Rect2(1152, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iq5a2"]
-atlas = ExtResource("2_iy1tj")
-region = Rect2(0, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_mdqj2"]
 atlas = ExtResource("2_iy1tj")
-region = Rect2(128, 0, 128, 128)
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7maid"]
 atlas = ExtResource("2_iy1tj")
-region = Rect2(256, 0, 128, 128)
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qkmtg"]
-atlas = ExtResource("3_iy1tj")
-region = Rect2(0, 0, 128, 128)
+atlas = ExtResource("2_iy1tj")
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_px0ii"]
 atlas = ExtResource("3_iy1tj")
-region = Rect2(128, 0, 128, 128)
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u7p63"]
 atlas = ExtResource("3_iy1tj")
-region = Rect2(256, 0, 128, 128)
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7t0xe"]
 atlas = ExtResource("3_iy1tj")
-region = Rect2(384, 0, 128, 128)
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hdv2e"]
 atlas = ExtResource("3_iy1tj")
-region = Rect2(512, 0, 128, 128)
+region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lcr4o"]
+atlas = ExtResource("3_iy1tj")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epwel"]
 atlas = ExtResource("3_iy1tj")
 region = Rect2(640, 0, 128, 128)
 
@@ -90,13 +95,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_io1r5")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_g7556")
 }, {
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_weoya")
 }, {
-"duration": 1.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_pwjjj")
 }, {
 "duration": 1.0,
@@ -120,22 +125,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iq5a2")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_mdqj2")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7maid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkmtg")
 }],
 "loop": 1,
 "name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qkmtg")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_px0ii")
 }, {
@@ -150,6 +152,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lcr4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epwel")
 }],
 "loop": 1,
 "name": &"walk",
@@ -159,17 +164,46 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrjoq"]
 size = Vector2(29, 85)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wrjoq"]
+radius = 70.0
+
 [node name="spider_enemy" type="CharacterBody2D" unique_id=235412138]
 script = ExtResource("1_7m584")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=513639371]
+[node name="Flippable" type="Node2D" parent="." unique_id=782414546]
+
+[node name="AttackArea" type="Area2D" parent="Flippable" unique_id=468328340]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/AttackArea" unique_id=2038728340]
+texture_filter = 1
+position = Vector2(-27.999998, 29)
+rotation = 0.7487463
+scale = Vector2(-0.90318877, 0.9548261)
+shape = SubResource("CapsuleShape2D_x8lf6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Flippable" unique_id=513639371]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_nirye")
 animation = &"attack"
 autoplay = "idle"
-frame = 9
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=993552027]
+texture_filter = 1
 position = Vector2(15, 21)
 shape = SubResource("RectangleShape2D_wrjoq")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1931975056]
+script = ExtResource("5_mdqj2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1218917293]
+position = Vector2(15, 21)
+shape = SubResource("CircleShape2D_wrjoq")
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=1117152289]
+
+[connection signal="body_entered" from="Flippable/AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="Flippable/AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
