@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b1aibvd4on61s"]
+
+[ext_resource type="Script" uid="uid://r5uuh0crbujr" path="res://scenes/enemy_spawn_manager.gd" id="1_m64xd"]
+[ext_resource type="PackedScene" uid="uid://b2gc8mi4dot4n" path="res://prefabs/enemies/spawn/spawn_point.tscn" id="2_d7u3t"]
+
+[node name="EnemySpawnManager" type="Node2D" unique_id=1286076052]
+script = ExtResource("1_m64xd")
+
+[node name="SpawnPoint" parent="." unique_id=1752072421 instance=ExtResource("2_d7u3t")]

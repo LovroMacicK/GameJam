@@ -2,12 +2,16 @@
 
 [ext_resource type="Script" uid="uid://8pmy2tpi5s50" path="res://prefabs/crop/Crop.gd" id="1_3wlrl"]
 [ext_resource type="Texture2D" uid="uid://dvuini1pvewjq" path="res://assets/items/Pumpkin-item.png" id="2_8go1t"]
+[ext_resource type="Texture2D" uid="uid://dtdysf4p485ok" path="res://assets/items/Pumpkin-Plant/Pumpkin-sprout.png" id="2_t2lhg"]
+[ext_resource type="Texture2D" uid="uid://cdt3nefyvt7er" path="res://assets/items/Pumpkin-Plant/Pumpkin-growing.png" id="3_cwf0m"]
+[ext_resource type="Texture2D" uid="uid://di8sb8syfr1ii" path="res://assets/items/Pumpkin-Plant/Pumpkin-grown.png" id="4_r84ju"]
 
 [node name="pumpkin" type="Node2D" unique_id=416708157]
+texture_filter = 1
 script = ExtResource("1_3wlrl")
 crop_name = "pumpkin"
 growth_time = 3.0
-growth_textures = Array[Texture2D]([ExtResource("2_8go1t"), ExtResource("2_8go1t"), ExtResource("2_8go1t")])
+growth_textures = Array[Texture2D]([ExtResource("2_t2lhg"), ExtResource("3_cwf0m"), ExtResource("4_r84ju")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1393837908]
 texture_filter = 1

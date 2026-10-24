@@ -1,12 +1,18 @@
 [gd_scene format=4 uid="uid://crpky87qkb8t6"]
 
+[ext_resource type="Script" uid="uid://c0av6luqithl1" path="res://scenes/world.gd" id="1_2lf6f"]
 [ext_resource type="PackedScene" uid="uid://cu6eip0qkser6" path="res://prefabs/UI/Inventory/Inventory.tscn" id="1_qfnet"]
+[ext_resource type="Script" uid="uid://lkr8jyskusqd" path="res://spider_enemy.gd" id="1_xgqkh"]
+[ext_resource type="PackedScene" uid="uid://b1aibvd4on61s" path="res://prefabs/enemies/spawn/enemy_spawn_manager.tscn" id="2_ctatt"]
+[ext_resource type="Texture2D" uid="uid://dru18eyaj6bw6" path="res://assets/player_walk.png" id="3_2lf6f"]
 [ext_resource type="Texture2D" uid="uid://vd40inlkb6ma" path="res://assets/tiles/grass.png" id="3_k0juu"]
+[ext_resource type="Texture2D" uid="uid://df4mkjjn1hipo" path="res://assets/player_idle.png" id="3_oo54l"]
 [ext_resource type="Script" uid="uid://cigwmqewk7db8" path="res://prefabs/UI/Inventory/inventory_ui.gd" id="3_qfnet"]
+[ext_resource type="Texture2D" uid="uid://daiy554kfx0nr" path="res://assets/player_idle_2.png" id="4_kpybi"]
 [ext_resource type="Script" uid="uid://bxn570ey60yi2" path="res://prefabs/player/player.gd" id="5_2lf6f"]
-[ext_resource type="Texture2D" uid="uid://iud5lfp5pv3n" path="res://icon.svg" id="6_7iits"]
+[ext_resource type="Texture2D" uid="uid://i365lp2fa5yi" path="res://assets/player_walk_2.png" id="6_kpybi"]
 [ext_resource type="Script" uid="uid://55xpvy2i58dx" path="res://prefabs/player/pickup_area.gd" id="7_oo54l"]
-[ext_resource type="Texture2D" uid="uid://3k667cyxanth" path="res://assets_placeholder/tileset/grass_w_track.png" id="7_w7kh3"]
+[ext_resource type="Texture2D" uid="uid://3k667cyxanth" path="res://assets/tiles/grass_w_track.png" id="7_w7kh3"]
 [ext_resource type="Script" uid="uid://vcm7mlt655ng" path="res://scenes/inventory_seeds_ui.gd" id="10_dss4m"]
 [ext_resource type="Texture2D" uid="uid://gs0b6qiy4274" path="res://assets/items/SeedBagCorn-item.png" id="10_jhx03"]
 [ext_resource type="Texture2D" uid="uid://cmekaks03v364" path="res://assets/items/SeedBagPumpkin-item.png" id="10_xo05s"]
@@ -19,6 +25,19 @@
 [ext_resource type="PackedScene" uid="uid://7etd875owf7k" path="res://prefabs/crop/pumpkin.tscn" id="17_pm21f"]
 [ext_resource type="PackedScene" uid="uid://byctqxpxc1ute" path="res://prefabs/crop/corn.tscn" id="18_2lf6f"]
 [ext_resource type="PackedScene" uid="uid://c7ng1hwvtdnco" path="res://prefabs/crop/eggplant.tscn" id="19_7iits"]
+[ext_resource type="Texture2D" uid="uid://brkmol7bdt7vb" path="res://assets/enemy/spider/SpiderEnemy-Attack.png" id="25_ts3gi"]
+[ext_resource type="Texture2D" uid="uid://bfl1k1w2wawha" path="res://assets/enemy/spider/SpiderEnemy-idle.png" id="26_0nbtd"]
+[ext_resource type="Texture2D" uid="uid://bflb444vtgmri" path="res://assets/enemy/spider/SpiderEnemy-Walk.png" id="27_37qwj"]
+
+[sub_resource type="Gradient" id="Gradient_7iits"]
+offsets = PackedFloat32Array(0, 0.69471157)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wrjoq"]
+gradient = SubResource("Gradient_7iits")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nirye"]
 
@@ -26,11 +45,25 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_7iits")
+"texture": ExtResource("3_oo54l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kpybi")
 }],
 "loop": 1,
-"name": &"default",
-"speed": 5.0
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2lf6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kpybi")
+}],
+"loop": 1,
+"name": &"walk_front",
+"speed": 3.5
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_plg1o"]
@@ -88,7 +121,169 @@ sources/0 = SubResource("TileSetAtlasSource_w7kh3")
 sources/1 = SubResource("TileSetAtlasSource_e3hyu")
 sources/2 = SubResource("TileSetAtlasSource_jhx03")
 
-[node name="World" type="Node2D" unique_id=1949591470]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkqs3"]
+atlas = ExtResource("25_ts3gi")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io1r5"]
+atlas = ExtResource("25_ts3gi")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7556"]
+atlas = ExtResource("25_ts3gi")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_weoya"]
+atlas = ExtResource("25_ts3gi")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwjjj"]
+atlas = ExtResource("25_ts3gi")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glcn4"]
+atlas = ExtResource("25_ts3gi")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ckrh"]
+atlas = ExtResource("25_ts3gi")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3tg2"]
+atlas = ExtResource("25_ts3gi")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5d61"]
+atlas = ExtResource("25_ts3gi")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfacy"]
+atlas = ExtResource("25_ts3gi")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq5a2"]
+atlas = ExtResource("26_0nbtd")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdqj2"]
+atlas = ExtResource("26_0nbtd")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7maid"]
+atlas = ExtResource("26_0nbtd")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkmtg"]
+atlas = ExtResource("27_37qwj")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_px0ii"]
+atlas = ExtResource("27_37qwj")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7p63"]
+atlas = ExtResource("27_37qwj")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7t0xe"]
+atlas = ExtResource("27_37qwj")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdv2e"]
+atlas = ExtResource("27_37qwj")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcr4o"]
+atlas = ExtResource("27_37qwj")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nirye"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkqs3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_io1r5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7556")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_weoya")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_pwjjj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glcn4")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_8ckrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3tg2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5d61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfacy")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq5a2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdqj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7maid")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkmtg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_px0ii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7p63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7t0xe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdv2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcr4o")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrjoq"]
+size = Vector2(29, 85)
+
+[node name="World" type="Node2D" unique_id=1949591470 node_paths=PackedStringArray("day_label", "time_label")]
+script = ExtResource("1_2lf6f")
+day_label = NodePath("player/CanvasLayer/DayTimeLabels/DayLabel")
+time_label = NodePath("player/CanvasLayer/DayTimeLabels/TimeLabel")
+
+[node name="EnemySpawnManager" parent="." unique_id=1286076052 instance=ExtResource("2_ctatt")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=127486345]
+color = Color(0.13333334, 0.14901961, 0.25882354, 1)
 
 [node name="player" type="CharacterBody2D" parent="." unique_id=1931862810 node_paths=PackedStringArray("inventory") groups=["player"]]
 z_index = 1
@@ -96,13 +291,24 @@ position = Vector2(622, 394)
 script = ExtResource("5_2lf6f")
 inventory = NodePath("../Inventory")
 
+[node name="Lamp" type="PointLight2D" parent="player" unique_id=410369734]
+color = Color(0.7571679, 0.43122578, 0.3113343, 1)
+energy = 0.0
+range_z_min = -2000
+range_z_max = 2000
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_wrjoq")
+texture_scale = 8.0
+
 [node name="Collider" type="CollisionShape2D" parent="player" unique_id=691296988]
 shape = SubResource("RectangleShape2D_nirye")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="player" unique_id=696891595]
 texture_filter = 1
-scale = Vector2(0.5, 0.494)
+scale = Vector2(1, 0.988)
 sprite_frames = SubResource("SpriteFrames_wrjoq")
+animation = &"walk_front"
+autoplay = "idle"
 
 [node name="Camera" type="Camera2D" parent="player" unique_id=1847709986]
 process_callback = 0
@@ -330,6 +536,34 @@ text = "10"
 horizontal_alignment = 2
 vertical_alignment = 2
 
+[node name="DayTimeLabels" type="Control" parent="player/CanvasLayer" unique_id=645405838]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DayLabel" type="Label" parent="player/CanvasLayer/DayTimeLabels" unique_id=2027963408]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 69.0
+offset_bottom = 33.0
+theme_override_font_sizes/font_size = 24
+text = "Day: 10"
+
+[node name="TimeLabel" type="Label" parent="player/CanvasLayer/DayTimeLabels" unique_id=1143279580]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 45.0
+offset_right = 73.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 24
+text = "10:30"
+
 [node name="Inventory" parent="." unique_id=1881903355 instance=ExtResource("1_qfnet")]
 
 [node name="Tilemap" type="Node2D" parent="." unique_id=686378728]
@@ -382,3 +616,34 @@ inventory = NodePath("../../Inventory")
 pumpkin_scene = ExtResource("17_pm21f")
 corn_scene = ExtResource("18_2lf6f")
 eggplant_scene = ExtResource("19_7iits")
+
+[node name="DayTimer" type="Timer" parent="." unique_id=2131707278]
+process_callback = 0
+wait_time = 110.0
+autostart = true
+
+[node name="NightTimer" type="Timer" parent="." unique_id=19941403]
+process_callback = 0
+wait_time = 170.0
+
+[node name="spider_enemy" type="CharacterBody2D" parent="." unique_id=235412138 node_paths=PackedStringArray("player")]
+position = Vector2(751, 376)
+script = ExtResource("1_xgqkh")
+player = NodePath("../player")
+speed = 1200.0
+damage = 10
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="spider_enemy" unique_id=513639371]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_nirye")
+animation = &"attack"
+autoplay = "idle"
+frame = 9
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spider_enemy" unique_id=993552027]
+position = Vector2(15, 21)
+shape = SubResource("RectangleShape2D_wrjoq")
+
+[connection signal="timeout" from="DayTimer" to="." method="_on_day_timer_timeout"]
+[connection signal="timeout" from="NightTimer" to="." method="_on_night_timer_timeout"]

@@ -24,6 +24,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="GameJam2026"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg")
+
 [input]
 
 up={

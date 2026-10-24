@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://4tyi5jyb40sk"]
 
 [ext_resource type="Script" uid="uid://bxn570ey60yi2" path="res://prefabs/player/player.gd" id="1_sxsrd"]
-[ext_resource type="Texture2D" uid="uid://iud5lfp5pv3n" path="res://icon.svg" id="2_rdx4y"]
-[ext_resource type="Script" uid="uid://bfu8lu6eim8o7" path="res://prefabs/player/pickup_area.gd" id="3_1kmib"]
+[ext_resource type="Texture2D" uid="uid://dru18eyaj6bw6" path="res://assets/player_walk.png" id="2_1kmib"]
+[ext_resource type="Script" uid="uid://55xpvy2i58dx" path="res://prefabs/player/pickup_area.gd" id="3_1kmib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nirye"]
 
@@ -10,7 +10,7 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_rdx4y")
+"texture": ExtResource("2_1kmib")
 }],
 "loop": 1,
 "name": &"default",
@@ -24,6 +24,16 @@ height = 95.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_nirye"]
 radius = 62.008064
 
+[sub_resource type="Gradient" id="Gradient_2lf6f"]
+offsets = PackedFloat32Array(0, 0.7668269)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1kmib"]
+gradient = SubResource("Gradient_2lf6f")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
 [node name="Player" type="CharacterBody2D" unique_id=1931862810 groups=["player"]]
 script = ExtResource("1_sxsrd")
 
@@ -34,6 +44,7 @@ shape = SubResource("RectangleShape2D_nirye")
 texture_filter = 1
 scale = Vector2(0.5, 0.494)
 sprite_frames = SubResource("SpriteFrames_wrjoq")
+frame_progress = 0.627968
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1847709986]
 process_callback = 0
@@ -52,3 +63,13 @@ script = ExtResource("3_1kmib")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=147312150]
 shape = SubResource("CircleShape2D_nirye")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1984848671]
+visible = false
+color = Color(0.7571679, 0.43122578, 0.3113343, 1)
+energy = 2.0
+range_z_min = -2000
+range_z_max = 2000
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_1kmib")
+texture_scale = 8.0

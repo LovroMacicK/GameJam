@@ -4,8 +4,8 @@ signal inventory_changed
 
 var inventory: Dictionary = {
 	"pumpkin_seed": 5, #0
-	"corn_seed": 0, #1
-	"eggplant_seed": 0, #2
+	"corn_seed": 5, #1
+	"eggplant_seed": 5, #2
 	"pumpkin": 0, #3
 	"corn": 0, #4
 	"eggplant": 0 #5
@@ -31,7 +31,7 @@ func change_selected_slot_tools_inventory(item: String) -> void:
 
 
 func change_selected_slot_inventory(item: String) -> void:
-	var seed_items := ["pumpkin_seed", "corn_seed", "eggplant_seed"]
+	var seed_items: Array[String] = ["pumpkin_seed", "corn_seed", "eggplant_seed"]
 	var seed_index := seed_items.find(item)
 	if seed_index == -1:
 		return
@@ -56,7 +56,7 @@ func get_selected_item() -> String:
 
 
 func remove(item: String, amount: int) -> void:
-	if amount <= 0 or not inventory.has(item) or inventory[item] < amount:
+	if amount <= 0 || !inventory.has(item) || inventory[item] < amount:
 		return
 
 	inventory[item] -= amount
@@ -64,7 +64,7 @@ func remove(item: String, amount: int) -> void:
 
 
 func add(item: String, amount: int) -> void:
-	if amount <= 0 or not inventory.has(item):
+	if amount <= 0 || !inventory.has(item):
 		return
 
 	inventory[item] = mini(inventory[item] + amount, 64)

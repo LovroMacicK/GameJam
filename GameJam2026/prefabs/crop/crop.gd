@@ -7,13 +7,16 @@ class_name Crop extends Node2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var growth_timer: Timer = $GrowthTimer
 
-enum growth_stage { START, HALF_GROWN, READY_TO_HARVEST }
+enum growth_stage {
+	START,
+	HALF_GROWN,
+	READY_TO_HARVEST,
+}
 var current_stage = growth_stage.START
 
 
 func _ready() -> void:
 	if growth_textures.size() < 3:
-		push_error("Crop potrebuje 3 teksture!")
 		return
 
 	sprite.texture = growth_textures[0]

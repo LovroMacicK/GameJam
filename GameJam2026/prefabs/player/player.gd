@@ -14,9 +14,10 @@ var previous_state: String = "walk_front"
 func _physics_process(_delta: float) -> void:
 	move()
 
+
 func move() -> void:
 	var direction: Vector2 = Input.get_vector("left", "right", "up", "down")
-	
+
 	if Input.is_action_pressed("shift"):
 		velocity = direction.normalized() * RUNNING_SPEED
 	else:
@@ -25,40 +26,26 @@ func move() -> void:
 	animation_state_machine(direction)
 	move_and_slide()
 
+
 func flip(direction: Vector2) -> void:
 	if direction.x > 0:
-		sprite.flip_h = false
-	elif direction.x < 0:
 		sprite.flip_h = true
+	elif direction.x < 0:
+		sprite.flip_h = false
+
 
 func animation_state_machine(direction: Vector2) -> void:
 	if direction != Vector2.ZERO:
-		
 		if Input.is_action_pressed("shift"):
 			sprite.speed_scale = 1.8
 		else:
 			sprite.speed_scale = 1
-		
-		if direction.y > 0:
-			_play_animation("walk_front")
-			previous_state = "walk_front"
 
-		elif direction.y < 0:
-			_play_animation("walk_back")
-			previous_state = "walk_back"
-		
-		elif direction.y == 0 && direction.x != 0:
-			_play_animation("walk_side")
-		
-		else:
-			sprite.play(previous_state)
-
+	if direction == Vector2.ZERO:
+		_play_animation("idle")
 	else:
-		if previous_state == "walk_front":
-			_play_animation("idle_front")
+		_play_animation("walk_front")
 
-		elif previous_state == "walk_back":
-			_play_animation("idle_back")
 
 func _play_animation(animation_name: String) -> void:
 	if sprite.sprite_frames == null:
@@ -66,5 +53,5 @@ func _play_animation(animation_name: String) -> void:
 
 	if sprite.sprite_frames.has_animation(animation_name):
 		sprite.play(animation_name)
-	elif sprite.sprite_frames.has_animation("default"):
-		sprite.play("default")
+	elif sprite.sprite_frames.has_animation("idle"):
+		sprite.play("idle")

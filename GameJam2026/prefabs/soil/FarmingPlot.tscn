@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bxd20k7i2guvt"]
 
 [ext_resource type="Script" uid="uid://brchv1epkd1m1" path="res://prefabs/soil/farming_plot.gd" id="1_od1m5"]
-[ext_resource type="Texture2D" uid="uid://bm3irmwldqu75" path="res://assets_placeholder/tileset/plot.png" id="2_sgsnj"]
+[ext_resource type="Texture2D" uid="uid://bm3irmwldqu75" path="res://assets/tiles/plot.png" id="2_sgsnj"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3h5jr"]
 size = Vector2(43, 43)

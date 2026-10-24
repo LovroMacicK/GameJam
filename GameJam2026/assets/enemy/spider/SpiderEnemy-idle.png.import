@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3k667cyxanth"
-path="res://.godot/imported/grass_w_track.png-f9c276125a865808eb411491c3604373.ctex"
+uid="uid://bfl1k1w2wawha"
+path="res://.godot/imported/SpiderEnemy-idle.png-5158374b93964627c23c9918f2da729d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets_placeholder/tileset/grass_w_track.png"
-dest_files=["res://.godot/imported/grass_w_track.png-f9c276125a865808eb411491c3604373.ctex"]
+source_file="res://assets/enemy/spider/SpiderEnemy-idle.png"
+dest_files=["res://.godot/imported/SpiderEnemy-idle.png-5158374b93964627c23c9918f2da729d.ctex"]
 
 [params]
 
