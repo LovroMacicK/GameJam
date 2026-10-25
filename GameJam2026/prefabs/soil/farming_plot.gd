@@ -12,8 +12,10 @@ class_name FarmingPlot extends Area2D
 var crop_type: String
 var current_crop: Crop = null
 
+
 func _ready() -> void:
 	set_process_input(true)
+
 
 func plant_crop(seed: String) -> bool:
 	if current_crop != null or seed.is_empty() or not _is_player_close():
@@ -41,18 +43,23 @@ func plant_crop(seed: String) -> bool:
 	crop_type = seed.trim_suffix("_seed")
 
 	crop_container.add_child(current_crop)
-	if not inventory.get_count(seed) > 0:
-		current_crop.queue_free()
-		current_crop = null
-		crop_type = ""
-		return false
 
 	inventory.remove(seed, 1)
 	return true
 
 
+func water_crop() -> void:
+	if current_crop == null or not _is_player_close():
+		return
+
+	current_crop.water_crop()
+
+
 func harvest() -> bool:
 	if current_crop == null or not _is_player_close():
+		return false
+
+	if inventory.get_selected_item() != "scythe":
 		return false
 
 	var crop_name: String = current_crop.get_crop()
@@ -60,7 +67,7 @@ func harvest() -> bool:
 	if crop_name == "":
 		return false
 
-	if inventory == null or inventory.get_count(crop_name) >= 64:
+	if inventory.get_count(crop_name) >= 64:
 		return false
 
 	inventory.add(crop_name, 1)
@@ -73,6 +80,7 @@ func harvest() -> bool:
 
 func _is_player_close() -> bool:
 	var player: Node2D = get_tree().get_first_node_in_group("player") as Node2D
+
 	if player == null:
 		player = get_tree().current_scene.get_node_or_null("player") as Node2D
 
@@ -88,7 +96,12 @@ func _on_input_event_pickable(_viewport: Node, event: InputEvent, _shape_idx: in
 
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			plant_crop(inventory.get_selected_item())
+			var selected_item: String = inventory.get_selected_item()
+
+			if selected_item == "watering_can":
+				water_crop()
+			else:
+				plant_crop(selected_item)
 
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			harvest()

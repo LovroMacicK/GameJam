@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GameJam2026"
-run/main_scene="uid://crpky87qkb8t6"
+run/main_scene="uid://d2sm5l1ig1ts7"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="uid://2hjg16hbsno5"
+mouse_cursor/custom_image_hotspot=Vector2(14, 15)
 
 [dotnet]
 
@@ -26,7 +28,7 @@ project/assembly_name="GameJam2026"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/at-icons/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

@@ -13,21 +13,34 @@ enum growth_stage {
 	HALF_GROWN,
 	READY_TO_HARVEST,
 }
+
 var current_stage = growth_stage.START
+var is_watered: bool = false
 
 
 func _ready() -> void:
-	if growth_textures.size() < 3:
+	if growth_textures.size() < 3 or growth_offsets_y.size() < 3:
+		push_error("Crop potrebuje 3 teksture in 3 Y odmike.")
 		return
 
 	sprite.texture = growth_textures[0]
 	sprite.position.y = growth_offsets_y[0]
 	growth_timer.one_shot = true
+
+
+func water_crop() -> void:
+	if is_watered or current_stage == growth_stage.READY_TO_HARVEST:
+		return
+
+	is_watered = true
 	growth_timer.start(growth_time)
 
 
 func _process(_delta: float) -> void:
-	if current_stage == growth_stage.READY_TO_HARVEST:
+	if !is_watered or current_stage != growth_stage.START:
+		return
+
+	if growth_timer.is_stopped():
 		return
 
 	if growth_timer.time_left <= growth_time / 2.0:

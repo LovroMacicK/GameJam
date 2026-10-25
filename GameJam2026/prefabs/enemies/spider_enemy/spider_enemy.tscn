@@ -167,12 +167,24 @@ size = Vector2(29, 85)
 [sub_resource type="CircleShape2D" id="CircleShape2D_wrjoq"]
 radius = 70.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdqj2"]
+bg_color = Color(1, 0.2, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
 [node name="spider_enemy" type="CharacterBody2D" unique_id=235412138]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_7m584")
 
 [node name="Flippable" type="Node2D" parent="." unique_id=782414546]
 
 [node name="AttackArea" type="Area2D" parent="Flippable" unique_id=468328340]
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/AttackArea" unique_id=2038728340]
 texture_filter = 1
@@ -194,6 +206,7 @@ position = Vector2(15, 21)
 shape = SubResource("RectangleShape2D_wrjoq")
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1931975056]
+collision_layer = 16
 script = ExtResource("5_mdqj2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1218917293]
@@ -202,8 +215,18 @@ shape = SubResource("CircleShape2D_wrjoq")
 
 [node name="AttackCooldown" type="Timer" parent="." unique_id=1117152289]
 
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1553628796]
+unique_name_in_owner = true
+offset_left = -5.0
+offset_top = -40.0
+offset_right = 35.0
+offset_bottom = -34.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_mdqj2")
+show_percentage = false
+
 [connection signal="body_entered" from="Flippable/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="Flippable/AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="frame_changed" from="Flippable/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

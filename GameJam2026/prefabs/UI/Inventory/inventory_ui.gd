@@ -1,12 +1,21 @@
 class_name InventoryUI extends Control
 
 @export var inventory: Inventory
+@export var normal_slot_texture: Texture2D
+@export var selected_slot_texture: Texture2D
 
 @onready var slot_2_label: Label = %QuantityLabel_Slot_2
 @onready var slot_3_label: Label = %QuantityLabel_Slot_3
 @onready var slot_4_label: Label = %QuantityLabel_Slot_4
 
 @onready var grids: Array[PanelContainer] = [%Slot_0, %Slot_1, %Slot_2, %Slot_3, %Slot_4]
+@onready var slot_textures: Array[TextureRect] = [
+	%Slot_0.get_node("SlotTexture"),
+	%Slot_1.get_node("SlotTexture"),
+	%Slot_2.get_node("SlotTexture"),
+	%Slot_3.get_node("SlotTexture"),
+	%Slot_4.get_node("SlotTexture"),
+]
 
 var current_slot: int = 0
 var item_in_use: String = ""
@@ -25,13 +34,11 @@ func _ready() -> void:
 
 
 func update_selected_ui() -> void:
-	for i in range(grids.size()):
+	for i in range(slot_textures.size()):
 		if i == current_slot:
-			var style := StyleBoxFlat.new()
-			style.bg_color = Color.RED
-			grids[i].add_theme_stylebox_override("panel", style)
+			slot_textures[i].texture = selected_slot_texture
 		else:
-			grids[i].remove_theme_stylebox_override("panel")
+			slot_textures[i].texture = normal_slot_texture
 
 
 func _input(event: InputEvent) -> void:

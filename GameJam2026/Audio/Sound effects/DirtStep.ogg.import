@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dxajdxcptofxy"
+path="res://.godot/imported/DirtStep.ogg-69197a44a4ebc2466a0466624af66dbc.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Sound effects/DirtStep.ogg"
+dest_files=["res://.godot/imported/DirtStep.ogg-69197a44a4ebc2466a0466624af66dbc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

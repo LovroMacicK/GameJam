@@ -1,6 +1,3 @@
 [gd_scene format=3 uid="uid://b2gc8mi4dot4n"]
 
-[ext_resource type="Script" uid="uid://bgtadvgpgw53q" path="res://prefabs/enemies/spawn/spawn_point.gd" id="1_uluu1"]
-
 [node name="SpawnPoint" type="Node2D" unique_id=1752072421]
-script = ExtResource("1_uluu1")

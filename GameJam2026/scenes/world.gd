@@ -1,4 +1,4 @@
-extends Node2D
+class_name World extends Node2D
 
 # Warm autumn: #E8C9A3
 # Cozy autumn: #D9B18C
@@ -6,9 +6,9 @@ extends Node2D
 const DAY_COLOR: Color = Color("#E8C9A3")
 const NIGHT_COLOR: Color = Color("222642")
 
-const DAY_LENGTH: float = 110.0
+const DAY_LENGTH: float = 10.0
 const TRANSITION_LENGTH: float = 10.0
-const NIGHT_LENGTH: float = 170.0
+const NIGHT_LENGTH: float = 70.0
 
 @onready var day_timer: Timer = $DayTimer
 @onready var night_timer: Timer = $NightTimer
@@ -63,6 +63,7 @@ func _process(delta: float) -> void:
 	elif elapsed_time >= DAY_LENGTH:
 		if current_stage != Stages.DUSK:
 			current_stage = Stages.DUSK
+			print("DUSK")
 			start_transition_to_night()
 
 	else:
@@ -97,6 +98,7 @@ func update_time(time: float) -> String:
 
 
 func start_transition_to_night() -> void:
+	print("NIGHT")
 	start_day_to_night_transition = true
 	start_night_to_day_transition = false
 	var tween: Tween = create_tween()

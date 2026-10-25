@@ -3,30 +3,46 @@ class_name SpiderEnemy extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $Flippable/AnimatedSprite2D
 @onready var flippable: Node2D = $Flippable
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
+@onready var health_bar: ProgressBar = $HealthBar
 
 @export var player: CharacterBody2D
-@export var speed: float
-@export var damage: int
+@export var speed: float = 100.0
+@export var damage: int = 10
+@export var health: int = 30
+@export var knockback_strength: float = 280.0
+@export var stop_distance: float = 35.0
 
-var playerInRange: bool
-var isAttacking: bool
-var canAttack: bool
+var playerInRange: bool = false
+var isAttacking: bool = false
+var canAttack: bool = true
+var isDead: bool = false
+var knockback_velocity: Vector2 = Vector2.ZERO
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	playerInRange = false
+	player = get_tree().get_first_node_in_group("player")
+
+	health_bar.max_value = health
+	health_bar.value = health
+	health_bar.hide()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta: float) -> void:
-	if !isAttacking:
-		var direction: Vector2 = (player.global_position - global_position).normalized()
-		velocity = direction * speed
+func _physics_process(delta: float) -> void:
+	if isDead:
+		return
+
+	var direction: Vector2 = player.global_position - global_position
+	var distance: float = direction.length()
+
+	if distance > stop_distance && !isAttacking:
+		velocity = direction.normalized() * speed
 	else:
 		velocity = Vector2.ZERO
 
-	flip_spider(velocity)
+	velocity += knockback_velocity
+	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 900.0 * delta)
+
+	flip_spider(direction)
 	animation_state_machine(velocity)
 	move_and_slide()
 
@@ -49,8 +65,44 @@ func animation_state_machine(direction: Vector2) -> void:
 		sprite.play("walk")
 
 
+func take_damage(amount: int, attacker_position: Vector2) -> void:
+	health_bar.show()
+	if isDead:
+		return
+
+	health -= amount
+	health_bar.value = max(health, 0)
+
+	var direction: Vector2 = (global_position - attacker_position).normalized()
+	knockback_velocity = direction * knockback_strength
+
+	hit_flash()
+
+	if health <= 0:
+		die()
+
+
+func hit_flash() -> void:
+	sprite.modulate = Color(3, 3, 3)
+
+	var tween := create_tween()
+	tween.tween_property(sprite, "modulate", Color.WHITE, 0.12)
+
+
+func die() -> void:
+	isDead = true
+	isAttacking = false
+	velocity = Vector2.ZERO
+
+	if sprite.sprite_frames.has_animation("death"):
+		sprite.play("death")
+		await sprite.animation_finished
+
+	queue_free()
+
+
 func attack() -> void:
-	if isAttacking && canAttack:
+	if isAttacking && canAttack && !isDead && playerInRange:
 		player.take_damage(damage)
 		canAttack = false
 		attack_cooldown_timer.start()
@@ -78,3 +130,8 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 
 func _on_attack_cooldown_timeout() -> void:
 	canAttack = true
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if sprite.animation == "attack" && sprite.frame == 2:
+		attack()

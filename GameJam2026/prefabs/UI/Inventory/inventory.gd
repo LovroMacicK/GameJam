@@ -3,13 +3,13 @@ class_name Inventory extends Node
 signal inventory_changed
 
 var inventory: Dictionary = {
-	"pumpkin_seed": 5, #0
+	"pumpkin_seed": 0, #0
 	"corn_seed": 5, #1
-	"eggplant_seed": 5, #2
+	"eggplant_seed": 0, #2
 	"pumpkin": 0, #3
 	"corn": 0, #4
 	"eggplant": 0, #5
-	"coins": 10, #6
+	"coins": 0, #6
 }
 
 var tools_inventory: Array[String] = [
@@ -68,9 +68,12 @@ func add(item: String, amount: int) -> void:
 	if amount <= 0 || !inventory.has(item):
 		return
 
-	inventory[item] = mini(inventory[item] + amount, 64)
-	inventory_changed.emit()
+	if item == "coins":
+		inventory[item] += amount
+	else:
+		inventory[item] = mini(inventory[item] + amount, 64)
 
+	inventory_changed.emit()
 
 func get_count(item: String) -> int:
 	return inventory.get(item, 0)

@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://difrecysys87g"]
+
+[ext_resource type="Script" uid="uid://chongq1moui4n" path="res://prefabs/enemies/bug_enemy/bug_enemy.gd" id="1_mfoxv"]
+[ext_resource type="Script" uid="uid://dcdoh4hhvosy7" path="res://prefabs/enemies/spider_enemy/attack_area.gd" id="4_biut2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_18pdt"]
+radius = 14.09289
+height = 73.6599
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2etjr"]
+size = Vector2(29, 85)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fj6o3"]
+radius = 70.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hpwjx"]
+bg_color = Color(1, 0.2, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[node name="bug_enemy" type="CharacterBody2D" unique_id=1253454494]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_mfoxv")
+damage = 15
+health = 50
+knockback_strength = 120.0
+
+[node name="Flippable" type="Node2D" parent="." unique_id=1945228416]
+
+[node name="AttackArea" type="Area2D" parent="Flippable" unique_id=393296507]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippable/AttackArea" unique_id=1744459812]
+texture_filter = 1
+position = Vector2(-27.999998, 29)
+rotation = 0.7487463
+scale = Vector2(-0.90318877, 0.9548261)
+shape = SubResource("CapsuleShape2D_18pdt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1562608809]
+texture_filter = 1
+position = Vector2(15, 21)
+shape = SubResource("RectangleShape2D_2etjr")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1521215486]
+collision_layer = 16
+script = ExtResource("4_biut2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=443622715]
+position = Vector2(15, 21)
+shape = SubResource("CircleShape2D_fj6o3")
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=855786848]
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=610762507]
+unique_name_in_owner = true
+offset_left = -5.0
+offset_top = -40.0
+offset_right = 35.0
+offset_bottom = -34.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_hpwjx")
+show_percentage = false
+
+[connection signal="body_entered" from="Flippable/AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="Flippable/AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

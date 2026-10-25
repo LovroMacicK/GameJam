@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://drw3e7x4gppqq"
+path="res://.godot/imported/LittleBugAttack.wav-8a79df9dee608b41c8cc1f6059f06069.sample"
+
+[deps]
+
+source_file="res://Audio/Sound effects/LittleBugAttack.wav"
+dest_files=["res://.godot/imported/LittleBugAttack.wav-8a79df9dee608b41c8cc1f6059f06069.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

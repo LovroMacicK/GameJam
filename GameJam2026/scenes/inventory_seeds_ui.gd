@@ -3,7 +3,7 @@ class_name InventorySeedsUI extends Control
 @onready var pumpkin_count: Label = $Pumpkin/TextureRect/Label
 @onready var eggplant_count: Label = $Eggplant/TextureRect/Label
 @onready var corn_count: Label = $Corn/TextureRect/Label
-@export var coin_count: Label
+@onready var coin_count: Label = %CoinsCountLabel
 
 @export var inventory: Inventory
 

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ddk0rbj0btncu"]
+
+[ext_resource type="Texture2D" uid="uid://cdykpp1nssoq0" path="res://assets/Enviornment/Tree.png" id="1_2r5k7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2r5k7"]
+
+[node name="Tree" type="StaticBody2D" unique_id=1660324202]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=512596219]
+shape = SubResource("CapsuleShape2D_2r5k7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=211146932]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_2r5k7")
