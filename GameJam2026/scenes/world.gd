@@ -6,9 +6,9 @@ class_name World extends Node2D
 const DAY_COLOR: Color = Color("#E8C9A3")
 const NIGHT_COLOR: Color = Color("222642")
 
-const DAY_LENGTH: float = 10.0
+const DAY_LENGTH: float = 110.0
 const TRANSITION_LENGTH: float = 10.0
-const NIGHT_LENGTH: float = 70.0
+const NIGHT_LENGTH: float = 170.0
 
 @onready var day_timer: Timer = $DayTimer
 @onready var night_timer: Timer = $NightTimer
