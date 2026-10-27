@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://r5uuh0crbujr" path="res://scenes/enemy_spawn_manager.gd" id="2_5he1u"]
 [ext_resource type="PackedScene" uid="uid://br8etnj7j8ka7" path="res://prefabs/enemies/spider_enemy/spider_enemy.tscn" id="3_5poiv"]
 [ext_resource type="PackedScene" uid="uid://b2gc8mi4dot4n" path="res://prefabs/enemies/spawn/spawn_point.tscn" id="4_2cjbq"]
+[ext_resource type="PackedScene" uid="uid://buoit2vspgfi6" path="res://prefabs/enemies/bug_enemy/bug_enemy.tscn" id="4_cjqg0"]
 [ext_resource type="Script" uid="uid://bxn570ey60yi2" path="res://prefabs/player/player.gd" id="5_chjal"]
 [ext_resource type="Texture2D" uid="uid://r1lsxcmntrf7" path="res://assets/player/MC-scythe-sheet.png" id="6_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://df4mkjjn1hipo" path="res://assets/player_idle.png" id="7_vchkt"]
@@ -1035,7 +1036,7 @@ time_label = NodePath("player/CanvasLayer/DayTimeLabels/TimeLabel")
 
 [node name="EnemySpawnManager" type="Node2D" parent="World" unique_id=1310248136]
 script = ExtResource("2_5he1u")
-enemies = Array[PackedScene]([ExtResource("3_5poiv")])
+enemies = Array[PackedScene]([ExtResource("3_5poiv"), ExtResource("4_cjqg0")])
 
 [node name="SpawnPoint" parent="World/EnemySpawnManager" unique_id=1752072421 instance=ExtResource("4_2cjbq")]
 position = Vector2(-81, -337)
@@ -1749,6 +1750,10 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Price: 10"
 
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="World/player" unique_id=165593303]
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="World/player" unique_id=861510495]
+
 [node name="Inventory" parent="World" unique_id=1881903355 instance=ExtResource("31_y57op")]
 
 [node name="Tilemap" type="Node2D" parent="World" unique_id=2024259462]
@@ -1779,9 +1784,9 @@ collision_layer = 3
 collision_mask = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="World" unique_id=1877075731]
-visible = false
 
 [node name="GameOverUI" type="Control" parent="World/CanvasLayer" unique_id=735676225]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

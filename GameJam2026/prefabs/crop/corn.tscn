@@ -9,7 +9,7 @@
 [node name="corn" type="Node2D" unique_id=980667216]
 script = ExtResource("1_y71a3")
 crop_name = "corn"
-growth_time = 3.0
+growth_time = 25.0
 growth_textures = Array[Texture2D]([ExtResource("2_hmt33"), ExtResource("3_3xxox"), ExtResource("4_wwlhd")])
 growth_offsets_y = Array[int]([0, 0, -32])
 

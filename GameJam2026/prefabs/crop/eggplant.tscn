@@ -9,7 +9,7 @@
 [node name="eggplant" type="Node2D" unique_id=62204104]
 script = ExtResource("1_70dgo")
 crop_name = "eggplant"
-growth_time = 3.0
+growth_time = 40.0
 growth_textures = Array[Texture2D]([ExtResource("2_gsoto"), ExtResource("3_njrw5"), ExtResource("4_y2fp7")])
 growth_offsets_y = Array[int]([0, -32, -32])
 

@@ -21,7 +21,8 @@ var knockback_velocity: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
-	player = get_tree().get_first_node_in_group("player")
+	if player == null:
+		player = get_tree().get_first_node_in_group("player") as Player
 
 	health_bar.max_value = health
 	health_bar.value = health
@@ -111,7 +112,7 @@ func die() -> void:
 
 
 func attack() -> void:
-	if isAttacking && canAttack && !isDead:
+	if isAttacking && canAttack && !isDead && player != null:
 		if attack_area.overlaps_body(player):
 			player.take_damage(damage)
 			canAttack = false

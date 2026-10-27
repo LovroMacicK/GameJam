@@ -137,8 +137,22 @@ func take_damage(damage: int) -> void:
 
 	if health <= 0:
 		isAlive = false
-		game_over_ui.show()
+		velocity = Vector2.ZERO
+
+		if game_over_ui != null:
+			game_over_ui.show()
+			game_over_ui.process_mode = Node.PROCESS_MODE_ALWAYS
+
 		get_tree().paused = true
+
+
+func heal() -> void:
+	if !isAlive:
+		return
+
+	if world.current_stage == World.Stages.DAY && health < health_bar.max_value:
+		health = mini(health + 5, int(health_bar.max_value))
+		health_bar.value = health
 
 func apply_upgrade(upgrade_name: String) -> void:
 	var upgrade: Dictionary = multiplier_dictionary[upgrade_name]
@@ -172,10 +186,5 @@ func _on_sprite_animation_finished() -> void:
 func _on_sprite_frame_changed() -> void:
 	if sprite.animation == "attack" && sprite.frame == 1:
 		for body in attack_area.get_overlapping_bodies():
-			if body is SpiderEnemy:
+			if body is SpiderEnemy or body is BugEnemy:
 				body.take_damage(int(attack_damage * damage_multiplier), global_position)
-
-func heal() -> void:
-	if world.current_stage == world.Stages.DAY && health < health_bar.max_value:
-		health = mini(health + 5, int(health_bar.max_value))
-		health_bar.value = health

@@ -19,11 +19,12 @@ func _on_spawn_timer_timeout() -> void:
 
 	if enemies.is_empty() or spawn_points.is_empty():
 		return
-	
+
 	var random_enemy: PackedScene = enemies.pick_random()
 	var enemy: Node2D = random_enemy.instantiate()
-	if enemy is SpiderEnemy:
+
+	if enemy is SpiderEnemy or enemy is BugEnemy:
 		enemy.player = get_tree().get_first_node_in_group("player")
-	
+
 	get_tree().current_scene.add_child(enemy)
 	enemy.global_position = get_random_spawn_point()
